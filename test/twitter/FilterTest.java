@@ -35,12 +35,14 @@ public class FilterTest {
      * - Empty list: check behavior with an empty tweet list.
      * - No matches: ensure it returns an empty list when no tweets match the specified words.
      */
-
     private static final Instant d1 = Instant.parse("2016-02-17T10:00:00Z");
     private static final Instant d2 = Instant.parse("2016-02-17T11:00:00Z");
 
     private static final Tweet tweet1 = new Tweet(1, "alyssa", "is it reasonable to talk about rivest so much?", d1);
-    private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2);
+   /* private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest talk in 30 minutes #hype", d2); */
+    private static final Tweet tweet2 = new Tweet(2, "bbitdiddle", "rivest taalk in 30 minutes #hype", d2);
+
+
 
     @Test(expected = AssertionError.class)
     public void testAssertionsEnabled() {
@@ -97,30 +99,20 @@ public class FilterTest {
         assertTrue("expected empty list for no tweets", inTimespan.isEmpty());
     }
 
-//    // Test case for filtering tweets on the exact boundary of the timespan
-//    @Test
-//    public void testInTimespanBoundary() {
-//        Instant testStart = Instant.parse("2016-02-17T10:00:00Z");
-//        Instant testEnd = Instant.parse("2016-02-17T11:00:00Z");
-//
-//        List<Tweet> inTimespan = Filter.inTimespan(Arrays.asList(tweet1, tweet2), new Timespan(testStart, testEnd));
-//
-//        assertEquals("expected one tweet in the boundary timespan", 1, inTimespan.size());
-//        assertTrue("expected list to contain tweet1", inTimespan.contains(tweet1));
-//        assertFalse("should not contain tweet2", inTimespan.contains(tweet2));
-//    }
-
-
     // Test case for filtering tweets containing a specific word
+ // Test case for filtering tweets containing a specific word
     @Test
     public void testContaining() {
         List<Tweet> containing = Filter.containing(Arrays.asList(tweet1, tweet2), Arrays.asList("talk"));
 
         assertFalse("expected non-empty list", containing.isEmpty());
-        assertTrue("expected list to contain tweets", containing.containsAll(Arrays.asList(tweet1, tweet2)));
+        assertTrue("expected list to contain tweet1", containing.contains(tweet1));
+        assertFalse("expected list not to contain tweet2", containing.contains(tweet2));
         assertEquals("expected same order", 0, containing.indexOf(tweet1));
     }
 
+
+    
     // Test case for case insensitivity in tweet content filtering
     @Test
     public void testContainingCaseInsensitivity() {
@@ -146,6 +138,8 @@ public class FilterTest {
         assertTrue("expected empty list when no matches are found", containing.isEmpty());
     }
 
+    
+    
     /*
      * Warning: all the tests you write here must be runnable against any Filter
      * class that follows the spec. It will be run against several staff

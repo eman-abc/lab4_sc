@@ -23,6 +23,7 @@ import java.util.Set;
  * you should implement their method bodies, and you may add new public or
  * private methods or classes if you like.
  */
+
 public class SocialNetwork {
 
     /**

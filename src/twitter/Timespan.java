@@ -25,6 +25,7 @@ public class Timespan {
      * @param end
      *            ending date/time. Requires end >= start.
      */
+    
     public Timespan(Instant start, Instant end) {
         if (start.isAfter(end)) {
             throw new IllegalArgumentException("requires start <= end");

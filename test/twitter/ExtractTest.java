@@ -1,15 +1,13 @@
-/* Copyright (c) 2007-2016 MIT 6.005 course staff, all rights reserved.
- * Redistribution of original or derived work requires permission of course staff.
- */
 package twitter;
 
 import static org.junit.Assert.*;
-
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -278,6 +276,26 @@ public class ExtractTest {
 //    }
 
     /*
+     * LAB5 CODE
+     *  public void setUp() {
+        tweetNoMention = new Tweet(1, "userA", "Hello world!", Instant.now());
+        tweetSingleMention = new Tweet(2, "userB", "Hey @userC, how are you?", Instant.now());
+        tweetMultipleMention = new Tweet(3, "userC", "Testing @UserC and @userD!", Instant.now());
+        tweetInvalidMention = new Tweet(4, "userD", "Contact me at user@domain.com @userE.", Instant.now());
+        tweetSpecialCharacters = new Tweet(6, "userF", "What's up @user_123? @user2 and @user_123", Instant.now());
+        tweetEmpty = new Tweet(5, "userE", "No mentions here!", Instant.now());
+    }
+
+  private Tweet tweetSpecialCharacters;
+   private Tweet tweetInvalidMention;
+
+    @Test
+    public void testGetMentionedUsersMultipleMentions() {
+        Set<String> mentionedUsers = Extract.getMentionedUsers(Arrays.asList(tweetMultipleMention));
+        Set<String> expected = new HashSet<>(Arrays.asList("userC", "userD"));
+        assertEquals("expected mentioned users to be userC and userD", expected, mentionedUsers);
+    }
+
      * Warning: all the tests you write here must be runnable against any
      * Extract class that follows the spec. It will be run against several staff
      * implementations of Extract, which will be done by overwriting
@@ -290,5 +308,7 @@ public class ExtractTest {
      * them in a different class. If you only need them in this test class, then
      * keep them in this test class.
      */
+    
+ 
 
 }
